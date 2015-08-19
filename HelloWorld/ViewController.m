@@ -24,4 +24,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)button1:(id)sender {
+    if ([self.message.text isEqualToString:@"Push the button"]) {
+        self.message.text = @"Hello World !";
+    }
+    else {
+        self.message.text = @"Push the button";
+    }
+}
 @end
