@@ -10,9 +10,10 @@
 
 @interface Country : NSObject
 
-@property (nonatomic) NSString * name;
-@property (nonatomic) NSString * pathToImage;
+@property (nonatomic, strong) NSMutableString * name;
+@property (nonatomic, strong) NSMutableString * pathToImage;
+@property (nonatomic, strong) NSMutableString * currency;
 
-- (id) initWithName: (NSString *)name andImage: (NSString *) pathToImage;
+- (id) initWithName: (NSString *)name andImage: (NSString *) pathToImage andCurrency : (NSString *) currency;
 
 @end

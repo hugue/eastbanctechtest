@@ -16,7 +16,8 @@
 - (Country *) CountryAtIndex: (NSUInteger) index;
 
 - (void) addCountryWithName: (NSString *) name
-              andPathToImage: (NSString *) pathToImage;
+                andPathToImage: (NSString *) pathToImage
+                andCurrency: (NSString *) currency;
 
 - (void) removeCountryAtIndex: (NSUInteger) index;
 

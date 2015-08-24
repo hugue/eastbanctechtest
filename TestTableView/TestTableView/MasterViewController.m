@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 #import "Country.h"
 #import "CountryAccessController.h"
+#import "CountryTableViewCell.h"
 
 @interface MasterViewController ()
 
@@ -67,12 +68,14 @@
     return [self.countryAccessController CountryCount];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CountryCell" forIndexPath:indexPath];
+- (CountryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CountryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CountryCell" forIndexPath:indexPath];
 
     Country * country = [self.countryAccessController CountryAtIndex:indexPath.row];
-    cell.textLabel.text = country.name;
-    cell.imageView.image = [UIImage imageNamed: country.pathToImage];
+    cell.countryNameLabel.text = country.name;
+    cell.countryFlag.image = [UIImage imageNamed: country.pathToImage];
+    cell.countryCurrencyLabel.text = country.currency;
+    
     return cell;
 }
 
@@ -94,7 +97,7 @@
 {
     Country * countryToMove = [self.countryAccessController getCountryAtIndex:sourceIndexPath.row];
     [self.countryAccessController removeCountryAtIndex:sourceIndexPath.row];
-    [self.countryAccessController insertCountry:countryToMove AtIndex:sourceIndexPath.row];
+    [self.countryAccessController insertCountry:countryToMove AtIndex:destinationIndexPath.row];
 }
 
 - (BOOL) tableView: (UITableView *) tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -105,10 +108,15 @@
     return proposedDestinationIndexPath;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (IBAction)edit:(id)sender {
-    if ([self.instruction.titleLabel.text isEqualToString:@"Edit"]) {
-    [self setEditing:YES animated:YES];
-    [self.instruction setTitle:@"Done" forState: UIControlStateNormal];
+    if (self.editing == NO) {
+        [self setEditing:YES animated:YES];
+        [self.instruction setTitle:@"Done" forState: UIControlStateNormal];
     }
     else {
         [self setEditing:NO animated:YES];

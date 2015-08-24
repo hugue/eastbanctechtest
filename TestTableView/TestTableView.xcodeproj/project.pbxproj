@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F300395A1B86EFDC001CB08A /* CountryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F30039591B86EFDC001CB08A /* CountryTableViewCell.m */; };
 		F35D8E901B85883900961B2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E8F1B85883900961B2A /* main.m */; };
 		F35D8E931B85883900961B2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E921B85883900961B2A /* AppDelegate.m */; };
 		F35D8E961B85883900961B2A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E951B85883900961B2A /* MasterViewController.m */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F30039581B86EFDC001CB08A /* CountryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryTableViewCell.h; sourceTree = "<group>"; };
+		F30039591B86EFDC001CB08A /* CountryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryTableViewCell.m; sourceTree = "<group>"; };
 		F35D8E8A1B85883900961B2A /* TestTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35D8E8E1B85883900961B2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35D8E8F1B85883900961B2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				F35D8E921B85883900961B2A /* AppDelegate.m */,
 				F35D8E941B85883900961B2A /* MasterViewController.h */,
 				F35D8E951B85883900961B2A /* MasterViewController.m */,
+				F30039581B86EFDC001CB08A /* CountryTableViewCell.h */,
+				F30039591B86EFDC001CB08A /* CountryTableViewCell.m */,
 				F35D8E971B85883900961B2A /* DetailViewController.h */,
 				F35D8E981B85883900961B2A /* DetailViewController.m */,
 				F35D8E9A1B85883900961B2A /* Main.storyboard */,
@@ -253,6 +258,7 @@
 				F35D8EBB1B859CCD00961B2A /* CountryAccessController.m in Sources */,
 				F35D8E931B85883900961B2A /* AppDelegate.m in Sources */,
 				F35D8E961B85883900961B2A /* MasterViewController.m in Sources */,
+				F300395A1B86EFDC001CB08A /* CountryTableViewCell.m in Sources */,
 				F35D8E901B85883900961B2A /* main.m in Sources */,
 				F35D8E991B85883900961B2A /* DetailViewController.m in Sources */,
 				F35D8EB81B85957D00961B2A /* Country.m in Sources */,

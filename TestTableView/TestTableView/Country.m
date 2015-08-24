@@ -10,12 +10,13 @@
 
 @implementation Country
 
-- (id) initWithName: (NSString *) name andImage:(NSString *)pathToImage;
+- (id) initWithName: (NSString *) name andImage:(NSString *)pathToImage andCurrency: (NSString *) currency;
 {
     self = [super init];
     if(self != nil) {
-        _name = name;
-        _pathToImage = pathToImage;
+        self.name = [name mutableCopy];
+        self.currency = [currency mutableCopy];
+        self.pathToImage = [pathToImage mutableCopy];
         return self;
     }
     return nil;

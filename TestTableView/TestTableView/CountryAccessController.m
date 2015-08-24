@@ -32,16 +32,16 @@
 
 - (void) initializeDefaultCountries {
     
-    [self addCountryWithName:@"France" andPathToImage: @"France.gif"];
-    [self addCountryWithName:@"Italy" andPathToImage: @"images"];
-    [self addCountryWithName:@"Spain" andPathToImage: @"Spain.jpeg"];
-    [self addCountryWithName:@"United Kingdom" andPathToImage: @"uk.jpg"];
-    [self addCountryWithName:@"Russie" andPathToImage: @"Russie.jpeg"];
+    [self addCountryWithName:@"France" andPathToImage: @"France.gif" andCurrency: @"Euro"];
+    [self addCountryWithName:@"Italy" andPathToImage: @"images" andCurrency: @"Euro"];
+    [self addCountryWithName:@"Spain" andPathToImage: @"Spain.jpeg" andCurrency: @"Euro"];
+    [self addCountryWithName:@"United Kingdom" andPathToImage: @"uk.jpg" andCurrency: @"Pound"];
+    [self addCountryWithName:@"Russia" andPathToImage: @"Russie.jpeg" andCurrency: @"Ruble"];
 }
 
-- (void) addCountryWithName:(NSString *)name andPathToImage:(NSString *)pathToImage {
+- (void) addCountryWithName:(NSString *)name andPathToImage:(NSString *)pathToImage andCurrency: (NSString *) currency{
     
-    Country * newCountry = [[Country alloc] initWithName:name andImage:pathToImage];
+    Country * newCountry = [[Country alloc] initWithName:name andImage: pathToImage andCurrency: currency];
     [self.countryList addObject:newCountry];
 }
 
