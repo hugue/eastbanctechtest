@@ -10,6 +10,11 @@
 
 @implementation Country
 
+@dynamic pathToImage;
+@dynamic name;
+@dynamic currency;
+@dynamic displayOrder;
+
 - (id) initWithName: (NSString *) name andImage:(NSString *)pathToImage andCurrency: (NSString *) currency;
 {
     self = [super init];

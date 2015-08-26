@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-- (IBAction)edit:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *instruction;
+@property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
 
 @end
 

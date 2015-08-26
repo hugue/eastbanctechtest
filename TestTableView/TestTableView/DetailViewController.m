@@ -112,12 +112,13 @@
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 0) {
         //self.detailItem.name = [textField.text copy];
-        [self.detailItem.name setString: textField.text];
+        //[self.detailItem.name setString: textField.text];
+        self.detailItem.name = [textField.text mutableCopy];
     }
     else if (textField.tag == 1) {
-        [self.detailItem.currency setString: textField.text];
+        //[self.detailItem.currency setString: textField.text];
+        self.detailItem.currency = [textField.text mutableCopy];
     }
-    
     self.activeField = nil;
 }
 
@@ -132,8 +133,7 @@
     UIImage * image = [info objectForKey: UIImagePickerControllerEditedImage];
     
     [UIImagePNGRepresentation (image) writeToFile:imagePath atomically:YES];
-
-    [self.detailItem.pathToImage setString:imagePath];
+    self.detailItem.pathToImage = [imagePath mutableCopy];
     [self dismissViewControllerAnimated:YES completion:nil];
     self.countryFlag.image = [UIImage imageNamed:self.detailItem.pathToImage];
 }

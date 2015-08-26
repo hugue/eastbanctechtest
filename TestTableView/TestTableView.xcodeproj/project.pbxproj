@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F300395A1B86EFDC001CB08A /* CountryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F30039591B86EFDC001CB08A /* CountryTableViewCell.m */; };
+		F300F9DE1B8C545A00E6A96B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F300F9DD1B8C545A00E6A96B /* CoreData.framework */; };
+		F300F9E41B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F300F9E21B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld */; };
 		F35D8E901B85883900961B2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E8F1B85883900961B2A /* main.m */; };
 		F35D8E931B85883900961B2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E921B85883900961B2A /* AppDelegate.m */; };
 		F35D8E961B85883900961B2A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E951B85883900961B2A /* MasterViewController.m */; };
@@ -22,6 +24,7 @@
 		F35D8ECB1B85E13900961B2A /* uk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8EC91B85E13900961B2A /* uk.jpg */; };
 		F35D8ECE1B85E14100961B2A /* Russie.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8ECC1B85E14100961B2A /* Russie.jpeg */; };
 		F35D8ECF1B85E14100961B2A /* Spain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8ECD1B85E14100961B2A /* Spain.jpeg */; };
+		F3F51C181B8DB5AA00628172 /* TestTableView.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +37,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F300FA261B8C6E9500E6A96B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F30039581B86EFDC001CB08A /* CountryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryTableViewCell.h; sourceTree = "<group>"; };
 		F30039591B86EFDC001CB08A /* CountryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryTableViewCell.m; sourceTree = "<group>"; };
+		F300F9DD1B8C545A00E6A96B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F300F9E31B8C5E3B00E6A96B /* CountryCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CountryCoreData.xcdatamodel; sourceTree = "<group>"; };
 		F35D8E8A1B85883900961B2A /* TestTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35D8E8E1B85883900961B2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35D8E8F1B85883900961B2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +77,7 @@
 		F35D8EC91B85E13900961B2A /* uk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uk.jpg; sourceTree = "<group>"; };
 		F35D8ECC1B85E14100961B2A /* Russie.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Russie.jpeg; sourceTree = "<group>"; };
 		F35D8ECD1B85E14100961B2A /* Spain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Spain.jpeg; sourceTree = "<group>"; };
+		F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTableView.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F300F9DE1B8C545A00E6A96B /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +102,7 @@
 		F35D8E811B85883900961B2A = {
 			isa = PBXGroup;
 			children = (
+				F300F9DD1B8C545A00E6A96B /* CoreData.framework */,
 				F35D8E8C1B85883900961B2A /* TestTableView */,
 				F35D8EA91B85883900961B2A /* TestTableViewTests */,
 				F35D8E8B1B85883900961B2A /* Products */,
@@ -108,6 +128,7 @@
 				F35D8E911B85883900961B2A /* AppDelegate.h */,
 				F35D8E921B85883900961B2A /* AppDelegate.m */,
 				F35D8E941B85883900961B2A /* MasterViewController.h */,
+				F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */,
 				F35D8E951B85883900961B2A /* MasterViewController.m */,
 				F30039581B86EFDC001CB08A /* CountryTableViewCell.h */,
 				F30039591B86EFDC001CB08A /* CountryTableViewCell.m */,
@@ -121,6 +142,7 @@
 				F35D8EB71B85957D00961B2A /* Country.m */,
 				F35D8EB91B859CCD00961B2A /* CountryAccessController.h */,
 				F35D8EBA1B859CCD00961B2A /* CountryAccessController.m */,
+				F300F9E21B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld */,
 			);
 			path = TestTableView;
 			sourceTree = "<group>";
@@ -161,6 +183,7 @@
 				F35D8E861B85883900961B2A /* Sources */,
 				F35D8E871B85883900961B2A /* Frameworks */,
 				F35D8E881B85883900961B2A /* Resources */,
+				F300FA261B8C6E9500E6A96B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -238,6 +261,7 @@
 				F35D8EA11B85883900961B2A /* LaunchScreen.xib in Resources */,
 				F35D8ECF1B85E14100961B2A /* Spain.jpeg in Resources */,
 				F35D8E9E1B85883900961B2A /* Images.xcassets in Resources */,
+				F3F51C181B8DB5AA00628172 /* TestTableView.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +282,7 @@
 				F35D8EBB1B859CCD00961B2A /* CountryAccessController.m in Sources */,
 				F35D8E931B85883900961B2A /* AppDelegate.m in Sources */,
 				F35D8E961B85883900961B2A /* MasterViewController.m in Sources */,
+				F300F9E41B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld in Sources */,
 				F300395A1B86EFDC001CB08A /* CountryTableViewCell.m in Sources */,
 				F35D8E901B85883900961B2A /* main.m in Sources */,
 				F35D8E991B85883900961B2A /* DetailViewController.m in Sources */,
@@ -472,6 +497,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F300F9E21B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F300F9E31B8C5E3B00E6A96B /* CountryCoreData.xcdatamodel */,
+			);
+			currentVersion = F300F9E31B8C5E3B00E6A96B /* CountryCoreData.xcdatamodel */;
+			name = CountryCoreData.xcdatamodeld;
+			path = ../CountryCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F35D8E821B85883900961B2A /* Project object */;
 }

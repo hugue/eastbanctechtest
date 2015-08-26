@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Country : NSObject
+@interface Country : NSManagedObject
 
-@property (nonatomic, strong) NSMutableString * name;
-@property (nonatomic, strong) NSMutableString * pathToImage;
-@property (nonatomic, strong) NSMutableString * currency;
+@property (nonatomic, retain) NSMutableString * name;
+@property (nonatomic, retain) NSMutableString * pathToImage;
+@property (nonatomic, retain) NSMutableString * currency;
+@property (nonatomic)         NSInteger displayOrder;
 
 - (id) initWithName: (NSString *)name andImage: (NSString *) pathToImage andCurrency : (NSString *) currency;
 

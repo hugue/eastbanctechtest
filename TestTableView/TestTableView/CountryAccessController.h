@@ -7,9 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
 @class Country;
 
-@interface CountryAccessController : NSObject
+@interface CountryAccessController : NSObject <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSMutableArray * countryList;
+@property (nonatomic, strong) NSFetchedResultsController * countryListController;
+
 
 - (NSUInteger) CountryCount;
 

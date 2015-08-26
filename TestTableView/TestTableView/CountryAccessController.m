@@ -10,7 +10,6 @@
 #import "Country.h"
 
 @interface CountryAccessController()
-@property (nonatomic, readonly) NSMutableArray * countryList;
 
 - (void) initializeDefaultCountries;
 
@@ -18,12 +17,14 @@
 
 @implementation CountryAccessController
 
+@synthesize countryListController = _countryListController;
+
 - (id) init {
     self = [super init];
     
     if(self != nil) {
         _countryList = [[NSMutableArray alloc] init];
-        [self initializeDefaultCountries];
+        //[self initializeDefaultCountries];
         
         return self;
     }
