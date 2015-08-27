@@ -12,9 +12,8 @@
 @interface CountryTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *countryNameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *countryCurrencyLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *countryFlag;
+@property (weak, nonatomic) IBOutlet UILabel *currencyValueLabel;
 
 @end

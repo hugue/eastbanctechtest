@@ -160,6 +160,7 @@
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         picker.allowsEditing = YES;
         picker.delegate = self;
+        [self presentViewController:picker animated:YES completion:nil];
     }
 }
 

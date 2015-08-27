@@ -24,7 +24,8 @@
 		F35D8ECB1B85E13900961B2A /* uk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8EC91B85E13900961B2A /* uk.jpg */; };
 		F35D8ECE1B85E14100961B2A /* Russie.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8ECC1B85E14100961B2A /* Russie.jpeg */; };
 		F35D8ECF1B85E14100961B2A /* Spain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F35D8ECD1B85E14100961B2A /* Spain.jpeg */; };
-		F3F51C181B8DB5AA00628172 /* TestTableView.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */; };
+		F38662441B8EFD5600783C3B /* TestTableView.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F38662431B8EFD5600783C3B /* TestTableView.sqlite */; };
+		F38662461B8F076B00783C3B /* info.json in Resources */ = {isa = PBXBuildFile; fileRef = F38662451B8F076B00783C3B /* info.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +78,8 @@
 		F35D8EC91B85E13900961B2A /* uk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = uk.jpg; sourceTree = "<group>"; };
 		F35D8ECC1B85E14100961B2A /* Russie.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Russie.jpeg; sourceTree = "<group>"; };
 		F35D8ECD1B85E14100961B2A /* Spain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Spain.jpeg; sourceTree = "<group>"; };
-		F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTableView.sqlite; sourceTree = "<group>"; };
+		F38662431B8EFD5600783C3B /* TestTableView.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTableView.sqlite; sourceTree = "<group>"; };
+		F38662451B8F076B00783C3B /* info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = info.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		F35D8E811B85883900961B2A = {
 			isa = PBXGroup;
 			children = (
+				F38662451B8F076B00783C3B /* info.json */,
 				F300F9DD1B8C545A00E6A96B /* CoreData.framework */,
 				F35D8E8C1B85883900961B2A /* TestTableView */,
 				F35D8EA91B85883900961B2A /* TestTableViewTests */,
@@ -125,10 +128,10 @@
 				F35D8ECC1B85E14100961B2A /* Russie.jpeg */,
 				F35D8ECD1B85E14100961B2A /* Spain.jpeg */,
 				F35D8EC91B85E13900961B2A /* uk.jpg */,
+				F38662431B8EFD5600783C3B /* TestTableView.sqlite */,
 				F35D8E911B85883900961B2A /* AppDelegate.h */,
 				F35D8E921B85883900961B2A /* AppDelegate.m */,
 				F35D8E941B85883900961B2A /* MasterViewController.h */,
-				F3F51C171B8DB5AA00628172 /* TestTableView.sqlite */,
 				F35D8E951B85883900961B2A /* MasterViewController.m */,
 				F30039581B86EFDC001CB08A /* CountryTableViewCell.h */,
 				F30039591B86EFDC001CB08A /* CountryTableViewCell.m */,
@@ -261,7 +264,8 @@
 				F35D8EA11B85883900961B2A /* LaunchScreen.xib in Resources */,
 				F35D8ECF1B85E14100961B2A /* Spain.jpeg in Resources */,
 				F35D8E9E1B85883900961B2A /* Images.xcassets in Resources */,
-				F3F51C181B8DB5AA00628172 /* TestTableView.sqlite in Resources */,
+				F38662441B8EFD5600783C3B /* TestTableView.sqlite in Resources */,
+				F38662461B8F076B00783C3B /* info.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,7 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestTableView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -425,7 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestTableView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

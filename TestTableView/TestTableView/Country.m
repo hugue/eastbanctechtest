@@ -14,6 +14,7 @@
 @dynamic name;
 @dynamic currency;
 @dynamic displayOrder;
+@dynamic currencyValue;
 
 - (id) initWithName: (NSString *) name andImage:(NSString *)pathToImage andCurrency: (NSString *) currency;
 {
