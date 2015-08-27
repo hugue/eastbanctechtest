@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSMutableString * pathToImage;
 @property (nonatomic, retain) NSMutableString * currency;
 @property (nonatomic)         NSInteger displayOrder;
-@property (nonatomic, retain) NSNumber * currencyValue;
+@property (nonatomic, retain) NSMutableString * currencyValue;
 
 - (id) initWithName: (NSString *)name andImage: (NSString *) pathToImage andCurrency : (NSString *) currency;
 

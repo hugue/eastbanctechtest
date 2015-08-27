@@ -17,7 +17,7 @@
 @property (nonatomic, strong) CountryAccessController * countryAccessController;
 @property (nonatomic, strong) NSFetchedResultsController * countryListController;
 
-@property (nonatomic) NSString * urlConnection;
+@property (nonatomic, strong) NSString * urlConnection;
 @property (nonatomic, strong) NSMutableData * receivedData;
 
 @end
@@ -35,19 +35,13 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-   self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:self.editButtonItem,self.navigationItem.leftBarButtonItem, nil];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-
-/**Old Code used without the NSFetchedResultController
-    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription * entity = [NSEntityDescription entityForName:@"Country" inManagedObjectContext:managedObjectContext];
-    [fetchRequest setEntity: entity];
-**/
     
+    self.urlConnection = @"https://openexchangerates.org/api/latest.json?app_id=163f3aee83664b77b1950e9c088c2d7b";
+   
     NSError * error;
-//Old Code    self.countryAccessController.countryList = [[managedObjectContext executeFetchRequest:fetchRequest error:&error] mutableCopy];
     if(![[self fetchedResultsController] performFetch:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         exit(-1);
@@ -75,11 +69,9 @@
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"Country" inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entity];
-    
     NSSortDescriptor *sort = [[NSSortDescriptor alloc]
                               initWithKey: @"displayOrder" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
     [fetchRequest setFetchBatchSize:20];
     
     NSFetchedResultsController *theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -125,6 +117,10 @@
     }
 }
 
+- (IBAction)reloadValues:(id)sender {
+    [self launchConnection];
+}
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -155,31 +151,26 @@
     cell.countryNameLabel.text = country.name;
     cell.countryCurrencyLabel.text = country.currency;
     cell.countryFlag.image = [UIImage imageNamed:country.pathToImage];
+    cell.currencyValueLabel.text = country.currencyValue;
+    
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CountryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CountryCell" forIndexPath:indexPath];
-
     [self configureCell:cell atIndexPath:indexPath];
-    
-    /*Old Code without the NSFetchResultsController
-    Country * country = [self.countryAccessController CountryAtIndex:indexPath.row];
-    cell.countryNameLabel.text = country.name;
-    cell.countryFlag.image = [UIImage imageNamed: country.pathToImage];
-    cell.countryCurrencyLabel.text = country.currency;
-    */
     return cell;
 }
 
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//      [self.countryAccessController removeCountryAtIndex:indexPath.row];
         [managedObjectContext deleteObject:[countryListController objectAtIndexPath:indexPath]];
         NSError *error;
         if (![managedObjectContext save:&error]) {
@@ -191,12 +182,9 @@
     }
 }
 
+
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-//  Country * countryToMove = [self.countryAccessController getCountryAtIndex:sourceIndexPath.row];
-//  [self.countryAccessController removeCountryAtIndex:sourceIndexPath.row];
-//  [self.countryAccessController insertCountry:countryToMove AtIndex:destinationIndexPath.row];
-   
     // Grab the item we're moving.
     NSMutableArray * countries = [[self.countryListController fetchedObjects] mutableCopy];
     
@@ -326,6 +314,13 @@
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
+    connection = nil;
+    self.receivedData = nil;
+    
+    // inform the user
+    NSLog(@"Connection failed! Error - %@ %@",
+          [error localizedDescription],
+          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
 }
 
 #pragma mark Connection data preocessing methods
@@ -335,39 +330,43 @@
     
     //Create url connection and fire request
     NSURLConnection * conn = [[NSURLConnection alloc] initWithRequest: request delegate : self];
+    
+    if(!conn) {
+        NSLog(@"Can't open the connection");
+    }
+    
 }
 
 
 -  (void) parseData {
     NSError * error;
     NSLog(@"Will now parse the data");
-    /*NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: self.receivedData
-     options:NSJSONReadingMutableContainers
-     error:&error];
-     */
-    NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"json"];
+    NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: self.receivedData
+                                                            options:NSJSONReadingMutableContainers
+                                                            error:&error];
+    
+  /*  NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"json"];
     NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: [NSData dataWithContentsOfFile:dataPath]
                                                              options:NSJSONReadingMutableContainers
-                                                               error:&error];
+                                                               error:&error];*/
     
     
     NSDictionary * currencies = [webInfo objectForKey:@"rates"];
     
-    NSMutableString * key;
+   /* NSMutableString * key;
     NSLog(@"Parsong data");
     for(key in currencies.allKeys) {
-        NSLog(@"Currancy for %@ is %@", key, [currencies objectForKey:key]);
-    }
+        NSLog(@"Currency for %@ is %@", key, [currencies objectForKey:key]);
+    }*/
     [self updateCurrencyValues:currencies];
  }
 
 - (void) updateCurrencyValues:(NSDictionary *) newCurrencyValues {
     Country * country;
     for(country in [countryListController fetchedObjects]) {
-        country.currencyValue = [newCurrencyValues objectForKey:country.currency];
+        country.currencyValue = [[[newCurrencyValues objectForKey:country.currency] stringValue] mutableCopy];
     }
+    [self.tableView reloadData];
 }
-
-
 
 @end

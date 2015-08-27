@@ -13,5 +13,7 @@
 
 @property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
 
+- (IBAction)reloadValues:(id)sender;
+
 @end
 
