@@ -131,19 +131,29 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return [self.countryAccessController CountryCount];
-    id sectionInfo = [[self.countryListController sections] objectAtIndex: section];
-    return [sectionInfo numberOfObjects];
+    if (self.searchController.searchController.isActive) {
+        return [self.searchController.searchResults  count];
+    }
+    else {
+        id sectionInfo = [[self.countryListController sections] objectAtIndex: section];
+        return [sectionInfo numberOfObjects];
+    }
 }
 
 - (void)configureCell:(CountryTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    Country * country = [self.countryListController objectAtIndexPath:indexPath];
+    Country * country;
+    
+    if (self.searchController.searchController.isActive) {
+        country = [self.searchController.searchResults objectAtIndex:indexPath.row];
+    } else {
+        country = [self.countryListController objectAtIndexPath:indexPath];
+    }
+    
     cell.countryNameLabel.text = country.name;
     cell.countryCurrencyLabel.text = country.currency;
     cell.countryFlag.image = [UIImage imageNamed:country.pathToImage];
     cell.currencyValueLabel.text = country.currencyValue;
-    
 }
 
 
