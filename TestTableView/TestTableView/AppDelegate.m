@@ -23,42 +23,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
-    //NSManagedObjectContext * context = [self managedObjectContext];
-    //Code sample to add an object in the core data database
-    /*Country * country = [NSEntityDescription
-                               insertNewObjectForEntityForName:@"Country"
-                               inManagedObjectContext:context];
-    country.name = [@"France" mutableCopy];
-    country.currency = [@"Euro" mutableCopy];
-    country.pathToImage = [@"France.gif" mutableCopy];
-    
-         NSError *error;
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-    else {
-        NSLog(@"Saved");
-    }*/
-    /*NSError *error;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Country" inManagedObjectContext:context];
-    [fetchRequest setEntity:entity];
-    NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-    for (NSManagedObject *info in fetchedObjects) {
-        NSLog(@"Name: %@", [info valueForKey:@"name"]);
-        NSLog(@"Currency: %@", [info valueForKey:@"currency"]);
-        NSLog(@"Path to image: %@", [info valueForKey:@"pathToImage"]);
-    }
-    */
-    // Override point for customization after application launch.
+       // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *) self.window.rootViewController;
     MasterViewController * controller = (MasterViewController *) navigationController.topViewController;
     
     controller.managedObjectContext = self.managedObjectContext;
-    
+    controller.connectionController = [[ConnectionController alloc] init];
+    controller.connectionController.delegate = controller;
 
     return YES;
 }
@@ -113,7 +84,7 @@
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return _managedObjectContext;

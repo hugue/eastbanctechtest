@@ -7,18 +7,11 @@
 //
 
 #import "MasterViewController.h"
-#import "DetailViewController.h"
-#import "Country.h"
-#import "CountryAccessController.h"
-#import "CountryTableViewCell.h"
 
 @interface MasterViewController ()
 
 @property (nonatomic, strong) CountryAccessController * countryAccessController;
 @property (nonatomic, strong) NSFetchedResultsController * countryListController;
-
-@property (nonatomic, strong) NSString * urlConnection;
-@property (nonatomic, strong) NSMutableData * receivedData;
 
 @end
 
@@ -38,8 +31,6 @@
     self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:self.editButtonItem,self.navigationItem.leftBarButtonItem, nil];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
-    
-    self.urlConnection = @"https://openexchangerates.org/api/latest.json?app_id=163f3aee83664b77b1950e9c088c2d7b";
    
     NSError * error;
     if(![[self fetchedResultsController] performFetch:&error]) {
@@ -92,10 +83,10 @@
     Country * newCountry = [NSEntityDescription
                                     insertNewObjectForEntityForName:@"Country"
                                     inManagedObjectContext:self.managedObjectContext];
-    newCountry.displayOrder = 0;
+    newCountry.displayOrder =  0;
     newCountry.currencyValue = 0;
     newCountry.name         = [@"name" mutableCopy];
-    newCountry.currency     = [@"currancy" mutableCopy];
+    newCountry.currency     = [@"currency" mutableCopy];
     newCountry.pathToImage  = [@"defaultImage" mutableCopy];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
@@ -118,7 +109,7 @@
 }
 
 - (IBAction)reloadValues:(id)sender {
-    [self launchConnection];
+    [self.connectionController launchSession];
 }
 
 #pragma mark - Segues
@@ -159,6 +150,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CountryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CountryCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[CountryTableViewCell alloc] init];
+    }
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -204,8 +198,6 @@
         [mo setValue:[NSNumber numberWithInt:i++] forKey:@"displayOrder"];
     }
    }
-
-
 
 - (BOOL) tableView: (UITableView *) tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
     return YES;
@@ -283,90 +275,25 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark NSURLConnection Delegate Methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // A response has been received, this is where we initialize the instance var you created
-    // so that we can append data to it in the didReceiveData method
-    // Furthermore, this method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
-    self.receivedData = [[NSMutableData alloc] init];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the instance variable you declared
-    [self.receivedData appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    [self parseData];
-    
-}
-
-- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // The request has failed for some reason!
-    // Check the error var
-    connection = nil;
-    self.receivedData = nil;
-    
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-}
-
-#pragma mark Connection data preocessing methods
-- (void) launchConnection {
-    //Create the request
-    NSURLRequest * request = [NSURLRequest requestWithURL:[NSURL URLWithString: self.urlConnection]];
-    
-    //Create url connection and fire request
-    NSURLConnection * conn = [[NSURLConnection alloc] initWithRequest: request delegate : self];
-    
-    if(!conn) {
-        NSLog(@"Can't open the connection");
-    }
-    
-}
-
-
--  (void) parseData {
-    NSError * error;
-    NSLog(@"Will now parse the data");
-    NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: self.receivedData
-                                                            options:NSJSONReadingMutableContainers
-                                                            error:&error];
-    
-  /*  NSString * dataPath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"json"];
-    NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: [NSData dataWithContentsOfFile:dataPath]
-                                                             options:NSJSONReadingMutableContainers
-                                                               error:&error];*/
-    
-    
-    NSDictionary * currencies = [webInfo objectForKey:@"rates"];
-    
-   /* NSMutableString * key;
-    NSLog(@"Parsong data");
-    for(key in currencies.allKeys) {
-        NSLog(@"Currency for %@ is %@", key, [currencies objectForKey:key]);
-    }*/
-    [self updateCurrencyValues:currencies];
- }
-
 - (void) updateCurrencyValues:(NSDictionary *) newCurrencyValues {
     Country * country;
     for(country in [countryListController fetchedObjects]) {
         country.currencyValue = [[[newCurrencyValues objectForKey:country.currency] stringValue] mutableCopy];
     }
     [self.tableView reloadData];
+}
+
+#pragma mark - Connection Controller Delegate Methods
+
+
+-  (void) parseData {
+    NSError * error;
+    NSLog(@"Will now parse the data");
+    NSDictionary * webInfo = [NSJSONSerialization JSONObjectWithData: self.connectionController.receivedData
+                                                             options:NSJSONReadingMutableContainers
+                                                               error:&error];
+    NSDictionary * currencies = [webInfo objectForKey:@"rates"];
+    [self updateCurrencyValues:currencies];
 }
 
 @end

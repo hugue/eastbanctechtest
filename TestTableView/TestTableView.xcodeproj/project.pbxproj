@@ -11,6 +11,7 @@
 		F300F9DE1B8C545A00E6A96B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F300F9DD1B8C545A00E6A96B /* CoreData.framework */; };
 		F300F9E41B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F300F9E21B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld */; };
 		F308ABE71B8F2B6200FC1ED7 /* TestTableView.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F308ABE61B8F2B6200FC1ED7 /* TestTableView.sqlite */; };
+		F308ABEA1B8F3A0300FC1ED7 /* ConnectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = F308ABE91B8F3A0300FC1ED7 /* ConnectionController.m */; };
 		F35D8E901B85883900961B2A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E8F1B85883900961B2A /* main.m */; };
 		F35D8E931B85883900961B2A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E921B85883900961B2A /* AppDelegate.m */; };
 		F35D8E961B85883900961B2A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F35D8E951B85883900961B2A /* MasterViewController.m */; };
@@ -56,6 +57,8 @@
 		F300F9DD1B8C545A00E6A96B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F300F9E31B8C5E3B00E6A96B /* CountryCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CountryCoreData.xcdatamodel; sourceTree = "<group>"; };
 		F308ABE61B8F2B6200FC1ED7 /* TestTableView.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestTableView.sqlite; sourceTree = "<group>"; };
+		F308ABE81B8F3A0300FC1ED7 /* ConnectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionController.h; sourceTree = "<group>"; };
+		F308ABE91B8F3A0300FC1ED7 /* ConnectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionController.m; sourceTree = "<group>"; };
 		F35D8E8A1B85883900961B2A /* TestTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35D8E8E1B85883900961B2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35D8E8F1B85883900961B2A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -128,24 +131,26 @@
 				F35D8ECC1B85E14100961B2A /* Russie.jpeg */,
 				F35D8ECD1B85E14100961B2A /* Spain.jpeg */,
 				F35D8EC91B85E13900961B2A /* uk.jpg */,
-				F35D8E911B85883900961B2A /* AppDelegate.h */,
 				F308ABE61B8F2B6200FC1ED7 /* TestTableView.sqlite */,
+				F35D8E911B85883900961B2A /* AppDelegate.h */,
 				F35D8E921B85883900961B2A /* AppDelegate.m */,
+				F308ABE81B8F3A0300FC1ED7 /* ConnectionController.h */,
+				F308ABE91B8F3A0300FC1ED7 /* ConnectionController.m */,
 				F35D8E941B85883900961B2A /* MasterViewController.h */,
 				F35D8E951B85883900961B2A /* MasterViewController.m */,
 				F30039581B86EFDC001CB08A /* CountryTableViewCell.h */,
 				F30039591B86EFDC001CB08A /* CountryTableViewCell.m */,
 				F35D8E971B85883900961B2A /* DetailViewController.h */,
 				F35D8E981B85883900961B2A /* DetailViewController.m */,
-				F35D8E9A1B85883900961B2A /* Main.storyboard */,
-				F35D8E9D1B85883900961B2A /* Images.xcassets */,
-				F35D8E9F1B85883900961B2A /* LaunchScreen.xib */,
-				F35D8E8D1B85883900961B2A /* Supporting Files */,
 				F35D8EB61B85957D00961B2A /* Country.h */,
 				F35D8EB71B85957D00961B2A /* Country.m */,
 				F35D8EB91B859CCD00961B2A /* CountryAccessController.h */,
 				F35D8EBA1B859CCD00961B2A /* CountryAccessController.m */,
 				F300F9E21B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld */,
+				F35D8E9A1B85883900961B2A /* Main.storyboard */,
+				F35D8E9D1B85883900961B2A /* Images.xcassets */,
+				F35D8E9F1B85883900961B2A /* LaunchScreen.xib */,
+				F35D8E8D1B85883900961B2A /* Supporting Files */,
 			);
 			path = TestTableView;
 			sourceTree = "<group>";
@@ -221,7 +226,7 @@
 		F35D8E821B85883900961B2A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = hugues;
 				TargetAttributes = {
 					F35D8E891B85883900961B2A = {
@@ -287,6 +292,7 @@
 				F35D8E931B85883900961B2A /* AppDelegate.m in Sources */,
 				F35D8E961B85883900961B2A /* MasterViewController.m in Sources */,
 				F300F9E41B8C5E3B00E6A96B /* CountryCoreData.xcdatamodeld in Sources */,
+				F308ABEA1B8F3A0300FC1ED7 /* ConnectionController.m in Sources */,
 				F300395A1B86EFDC001CB08A /* CountryTableViewCell.m in Sources */,
 				F35D8E901B85883900961B2A /* main.m in Sources */,
 				F35D8E991B85883900961B2A /* DetailViewController.m in Sources */,
@@ -353,6 +359,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -417,8 +424,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestTableView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "eastbanchtech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -429,8 +437,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TestTableView/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "eastbanchtech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -450,6 +459,7 @@
 				);
 				INFOPLIST_FILE = TestTableViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "eastbanchtech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTableView.app/TestTableView";
 			};
@@ -465,6 +475,7 @@
 				);
 				INFOPLIST_FILE = TestTableViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "eastbanchtech.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTableView.app/TestTableView";
 			};

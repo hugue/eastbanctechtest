@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, NSURLConnectionDelegate>
+#import "DetailViewController.h"
+#import "Country.h"
+#import "CountryAccessController.h"
+#import "CountryTableViewCell.h"
+#import "ConnectionController.h"
+
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, ConnectionControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
+@property (nonatomic, strong) ConnectionController * connectionController;
 
 - (IBAction)reloadValues:(id)sender;
 

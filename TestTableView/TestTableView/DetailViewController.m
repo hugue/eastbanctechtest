@@ -146,46 +146,45 @@
 //Button hidden in the image to change it
 - (IBAction)changePicture:(id)sender {
     
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIActionSheet * photoSourceSheet = [[UIActionSheet alloc] initWithTitle: @"Select New Image"
-                                                                       delegate:self
-                                                                       cancelButtonTitle:@"Cancel"
-                                                                       destructiveButtonTitle:nil
-                                                                       otherButtonTitles:@"Take a Picture",@"Choose in Library", nil];
-        [photoSourceSheet showFromRect:((UIButton *)sender).frame inView:self.view animated:YES];
-    }
-    else {
-     
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.allowsEditing = YES;
-        picker.delegate = self;
-        [self presentViewController:picker animated:YES completion:nil];
-    }
-}
-
-//Choose between taking a new picture or select one in the Library
-- (void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.cancelButtonIndex) {
-        return;
-    }
-    
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     
-    switch (buttonIndex) {
-        case 0:
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            break;
-        case 1:
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            break;
-        default:;
+    UIAlertController * photoSource = [UIAlertController alertControllerWithTitle:@"Select New Image"
+                                                                          message:nil
+                                                                          preferredStyle: UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                      style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                      [photoSource dismissViewControllerAnimated:YES completion:nil];
+                                                      }];
+    
+    UIAlertAction * libraryAction = [UIAlertAction actionWithTitle:@"Choose in Library"
+                                                      style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                      [photoSource dismissViewControllerAnimated:YES completion:nil];
+                                                      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                                                      [self presentViewController:picker animated:YES completion:nil];
+                                                      }];
+    
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    
+        UIAlertAction * cameraAction = [UIAlertAction actionWithTitle:@"Take a Picture"
+                                                            style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                            [photoSource dismissViewControllerAnimated:YES completion:nil];
+                                                            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                            [self presentViewController:picker animated:YES completion:nil];
+                                                            }];
+        [photoSource addAction: cameraAction];
+
     }
     
-    [self presentViewController:picker animated:YES completion:nil];
+    [photoSource addAction: cancelAction];
+    [photoSource addAction:libraryAction];
+    
+    [self presentViewController:photoSource animated:YES completion:nil];
 }
-
 
 @end
