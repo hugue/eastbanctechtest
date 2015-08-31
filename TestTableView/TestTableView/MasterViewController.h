@@ -14,15 +14,16 @@
 #import "CountryAccessController.h"
 #import "CountryTableViewCell.h"
 #import "ConnectionController.h"
-#import "SearchController.h"
+#import "CountrySearchController.h"
+#import "CountrySearchControllerDelegate.h"
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, ConnectionControllerDelegate, SearchControllerDelegate>
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, CountrySearchControllerDelegate, ConnectionControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong) ConnectionController * connectionController;
-@property (nonatomic, strong) SearchController * searchController;
+//@property (nonatomic, strong) UISearchController * searchController;
+@property (nonatomic, strong) CountrySearchController * countrySearchController;
 
 - (IBAction)reloadValues:(id)sender;
-
 @end
 

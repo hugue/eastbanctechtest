@@ -20,6 +20,7 @@
 
 @synthesize managedObjectContext;
 @synthesize countryListController;
+@synthesize countrySearchController;
 
 - (void) awakeFromNib {
     [super awakeFromNib];
@@ -38,6 +39,11 @@
         exit(-1);
     }
     self.title = @"Country";
+    
+    self.countrySearchController = [[CountrySearchController alloc ] init];
+    self.countrySearchController.delegate = self;
+    [self.countrySearchController configureSearchController];
+    self.tableView.tableHeaderView = self.countrySearchController.searchController.searchBar;
 }
 
 - (void) viewDidUnload {
@@ -116,10 +122,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showCountryDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        /**Old Code with CountryAccessController
-        Country * country = [self.countryAccessController CountryAtIndex:indexPath.row];*/
-        Country * country = [self.countryListController objectAtIndexPath:indexPath];
+        NSIndexPath * indexPath = [self.tableView indexPathForSelectedRow];
+        Country * country;
+        
+        if (self.countrySearchController.searchController.isActive) {
+            country = [self.countrySearchController.searchResults objectAtIndex:indexPath.row];
+            self.countrySearchController.searchController.active = NO;
+        }
+        else {
+            country = [self.countryListController objectAtIndexPath:indexPath];
+        }
         [[segue destinationViewController] setDetailItem:country];
     }
 }
@@ -131,8 +143,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.searchController.searchController.isActive) {
-        return [self.searchController.searchResults  count];
+    if (self.countrySearchController.searchController.isActive) {
+        return [self.countrySearchController.searchResults  count];
     }
     else {
         id sectionInfo = [[self.countryListController sections] objectAtIndex: section];
@@ -144,8 +156,8 @@
     
     Country * country;
     
-    if (self.searchController.searchController.isActive) {
-        country = [self.searchController.searchResults objectAtIndex:indexPath.row];
+    if (self.countrySearchController.searchController.isActive) {
+        country = [self.countrySearchController.searchResults objectAtIndex:indexPath.row];
     } else {
         country = [self.countryListController objectAtIndexPath:indexPath];
     }
@@ -304,6 +316,16 @@
                                                                error:&error];
     NSDictionary * currencies = [webInfo objectForKey:@"rates"];
     [self updateCurrencyValues:currencies];
+}
+
+#pragma mark - SearchController delegate methods
+
+- (void) updateSearchResults {
+    [self.tableView reloadData];
+}
+
+- (void) giveDataToSearchIn {
+    self.countrySearchController.countries = [[self.countryListController fetchedObjects] mutableCopy];
 }
 
 @end

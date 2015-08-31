@@ -8,19 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "MasterViewController.h"
+#import "CountrySearchControllerDelegate.h"
 
-@interface SearchController : NSObject <UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+
+@interface CountrySearchController : NSObject <UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSArray * countries;
 @property (nonatomic, strong) NSMutableArray * searchResults;
 @property (strong, nonatomic) UISearchController * searchController;
-@property (nonatomic, strong) MasterViewController * delegate;
+@property (nonatomic, strong) id delegate;
 
-- (id) initWithDelegate: (MasterViewController *) delegate;
-
-@end
-@protocol SearchControllerDelegate <NSObject>
-
+- (id) init;
+- (void) configureSearchController;
 
 @end
+
