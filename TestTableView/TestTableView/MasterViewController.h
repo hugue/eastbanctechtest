@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+@import MediaPlayer;
+
 #import "DetailViewController.h"
 #import "Country.h"
 #import "CountryAccessController.h"
